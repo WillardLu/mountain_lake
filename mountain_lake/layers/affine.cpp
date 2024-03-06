@@ -1,0 +1,35 @@
+// @copyright Copyright 2024 Willard Lu
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file or at
+// https://opensource.org/licenses/MIT.
+#include "affine.h"
+
+/// @brief 仿射变换层正向传播
+///        （Forward propagation of affine transformed layers）
+/// @param X 输入信号（input signals）
+/// @param W 权重（weights）
+/// @param B 偏置（bias）
+/// @param A 输出信号（output signals）
+void Affine::Forward(MatrixXf &X, MatrixXf &W, MatrixXf &B, MatrixXf &A) {
+  A = X * W + B;
+}
+
+/// @brief 仿射变换层反向传播
+///        （Backpropagation of affine transformed layers）
+/// @param X 输入信号（input signals）
+/// @param W 权重（weights）
+/// @param dA 输出信号的导数（derivative of the output signal）
+/// @param dB 偏置的导数（derivative of bias）
+/// @param dW 权重的导数（derivative of weights)
+/// @param dX 输入信号的导数（derivative of the input signal）
+/// @param layer_num 所处层号（Layer number）
+void Affine::Backward(MatrixXf &X, MatrixXf &W, MatrixXf &dA, MatrixXf &dB,
+                      MatrixXf &dW, MatrixXf &dX, int layer_num) {
+  dB.noalias() = dA;
+  dW.noalias() = X.transpose() * dA;
+  // 第一层的仿射变换层不需要计算输入信号的导数。
+  // The first affine transform layer does not need to compute the derivatives
+  // of the input signal.
+  if (layer_num > 1) dX.noalias() = dA * W.transpose();
+}

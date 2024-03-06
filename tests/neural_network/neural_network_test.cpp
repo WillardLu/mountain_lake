@@ -6,11 +6,18 @@
 #include <gtest/gtest.h>
 #include <neural_network/neural_network.h>
 
+TEST(NNTest, ReadConfig) {
+  NeuralNetwork nn;
+  string err = nn.ReadConfig("tests/testdata/config.toml");
+  ASSERT_EQ(err, "");
+  ASSERT_EQ(nn.GetLayers(), 4);
+  ASSERT_EQ(nn.GetLayer(2).name, "Sigmoid");
+  ASSERT_EQ(nn.GetLayer(3).type, "Affine");
+}
+
 TEST(NNTest, Init) {
   NeuralNetwork nn;
   string err = nn.Init("tests/testdata/config.toml");
   ASSERT_EQ(err, "");
-  ASSERT_EQ(nn.GetLayersNum(), 7);
-  ASSERT_EQ(nn.GetLayer(2).name, "ReLU");
-  ASSERT_EQ(nn.GetLayer(3).type, "Pooling");
+  ASSERT_EQ(nn.GetLearningRate() * 100, 1);
 }

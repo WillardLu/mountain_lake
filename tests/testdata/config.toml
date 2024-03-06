@@ -4,10 +4,10 @@ batch_size = 100
 learning_rate = 0.01
 
 [neural_network]
-struct1 = ["FirstAffine:50", "Sigmoid", "Affine:10", "SoftmaxWithLoss"]
+struct = ["Affine:50", "Sigmoid", "Affine:10", "SoftmaxWithLoss"]
 
-struct = [
-  "FirstConvolution-1",
+struct1 = [
+  "Convolution-1",
   "ReLU",
   "Pooling-1",
   "Affine:100",
@@ -17,7 +17,7 @@ struct = [
 ]
 
 # 卷积层
-[FirstConvolution-1]
+[Convolution-1]
 pad = 0
 stride = 1
 channel_num = 1

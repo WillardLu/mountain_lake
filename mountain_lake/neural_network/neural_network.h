@@ -3,37 +3,56 @@
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
-#ifndef NEURAL_NETWORK_NEURAL_NETWORK_H_
-#define NEURAL_NETWORK_NEURAL_NETWORK_H_
+#ifndef MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_
+#define MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_
 
+#include <layers/affine.h>
 #include <mountain_town/string/toml.h>
 
+#include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <unordered_map>
 
+using Eigen::MatrixXf;
 using std::unordered_map;
 
-/// @brief The structure of layers in neural networks
+/// @brief 层的结构（structure of layers）
 struct NeuralNetworkLayer {
-  string type = "";       // 类型
-  string name = "";       // 名称
-  int output_height = 0;  // 输出矩阵的行数
-  int output_width = 0;   // 输出矩阵的列数
-  int output_size = 0;    // 输出数据的大小
+  string type = "";
+  string name = "";
+  int output_height = 0;
+  int output_width = 0;
+  int output_size = 0;
 };
 
-// neural network class
+/// @brief 神经网络类（neural network class）
 class NeuralNetwork {
  public:
   NeuralNetwork();
   ~NeuralNetwork();
+  string ReadConfig(string config_file);
   string Init(string config_file);
-  inline int GetLayersNum() { return this->layers_num_; }
+  inline int GetLayers() { return this->layers_; }
   inline NeuralNetworkLayer& GetLayer(int index) { return this->nnl_[index]; }
+  inline float GetLearningRate() { return this->learning_rate_; }
 
  private:
-  NeuralNetworkLayer nnl_[100];  // layers in neural networks
-  int layers_num_;               // number of layers
+  string InitAffine(int i);
+
+  unordered_map<string, string> conf_;  // 配置信息（configuration information）
+  NeuralNetworkLayer nnl_[100];         // 层（layers）
+  int layers_;                          // 层的数量（number of layers）
+  float learning_rate_;                 // 学习率（learning rate）
+
+  MatrixXf W_[100];   // 权重（weights）
+  MatrixXf B_[100];   // 偏置（bias）
+  MatrixXf O_[100];   // 层输出（output of layers）
+  MatrixXf dW_[100];  // 权重的导数（derivative of weights)
+  MatrixXf dB_[100];  // 偏置的导数（derivative of bias）
+  MatrixXf dO_[100];  // 层输出参数的导数（The derivative of the output
+                      // parameter of the layer）
+
+  Affine affine_;
 };
 
-#endif  // NEURAL_NETWORK_NEURAL_NETWORK_H_
+#endif  // MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_
