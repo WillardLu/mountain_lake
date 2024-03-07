@@ -7,7 +7,7 @@
 
 using Eigen::MatrixXf;
 
-/// @brief sigmoid激活函数类
+/// @brief sigmoid函数类（Class of sigmoid functions）
 class Sigmoid {
  public:
   explicit Sigmoid(){};

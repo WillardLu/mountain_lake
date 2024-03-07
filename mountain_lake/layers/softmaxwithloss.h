@@ -10,7 +10,7 @@ using Eigen::MatrixXf;
 void Softmax(Eigen::MatrixXf &A, Eigen::MatrixXf &Y);
 float CrossEntropy(Eigen::MatrixXf &A, int t);
 
-/// @brief Softmax与Loss合并层类
+/// @brief Softmax与Loss合并层类（Softmax and Loss Merge Layer Classes）
 class SoftmaxWithLoss {
  public:
   explicit SoftmaxWithLoss(){};

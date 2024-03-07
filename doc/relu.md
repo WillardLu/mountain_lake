@@ -1,6 +1,6 @@
 # 线性整流层（ReLU Layer）
 
-## 1、公式（formula）
+## 1. 正向传播计算方法（Forward propagation calculation method）
 $$
 h(x) = 
 \begin{cases}

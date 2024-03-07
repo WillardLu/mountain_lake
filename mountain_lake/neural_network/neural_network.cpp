@@ -151,3 +151,61 @@ void NeuralNetwork::InitSoftmaxWithLoss(int i) {
   this->dO_[i] = MatrixXf::Zero(1, 1);
   this->Y_ = MatrixXf::Zero(1, this->nnl_[i - 1].output_size);
 }
+
+/// @brief 初始化卷积层
+/// @param conf 配置内容
+/// @param i 序号
+/// @return 错误信息
+string NeuralNetwork::InitConv(unordered_map<string, string> &conf, int i) {
+  if (conf[this->nnl_[i].name + ".pad"].empty() == true ||
+      conf[this->nnl_[i].name + ".stride"].empty() == true ||
+      conf[this->nnl_[i].name + ".filter_num"].empty() == true ||
+      conf[this->nnl_[i].name + ".filter_height"].empty() == true ||
+      conf[this->nnl_[i].name + ".filter_width"].empty() == true ||
+      conf[this->nnl_[i].name + ".channel_num"].empty() == true) {
+    return "错误：“" + this->nnl_[i].name + "”内容不全，请检查配置文件。\n";
+  }
+  int pad = atoi(conf[this->nnl_[i].name + ".pad"].c_str());
+  int stride = atoi(conf[this->nnl_[i].name + ".stride"].c_str());
+  int f_num = atoi(conf[this->nnl_[i].name + ".filter_num"].c_str());
+  int f_height = atoi(conf[this->nnl_[i].name + ".filter_height"].c_str());
+  int f_width = atoi(conf[this->nnl_[i].name + ".filter_width"].c_str());
+  int channel_num = atoi(conf[this->nnl_[i].name + ".channel_num"].c_str());
+  int o_height =
+      (this->nnl_[i - 1].output_height - f_height + 2 * pad) / stride + 1;
+  int o_width =
+      (this->nnl_[i - 1].output_width - f_width + 2 * pad) / stride + 1;
+  this->nnl_[i].output_height = o_height;
+  this->nnl_[i].output_width = o_width;
+  this->nnl_[i].output_size = o_height * o_width * f_num;
+  this->cc_[i].pad = pad;
+  this->cc_[i].stride = stride;
+  this->cc_[i].number = f_num;
+  this->cc_[i].height = f_height;
+  this->cc_[i].width = f_width;
+  this->cc_[i].channel_num = channel_num;
+  this->cc_[i].i_height = this->nnl_[i - 1].output_height;
+  this->cc_[i].i_width = this->nnl_[i - 1].output_width;
+  this->cc_[i].o_height = o_height;
+  this->cc_[i].o_width = o_width;
+  // 初始化权重
+  this->W_[i] = MatrixXf(1, f_num * f_height * f_width);
+  float *w_tmp = new float[f_num * f_height * f_width];
+  if (w_tmp == nullptr) {
+    return "初始化卷积层时内存分配失败。\n";
+  }
+  // 这里的初始化参数设置很重要
+  NormalDistr(w_tmp, f_num * f_height * f_width, 0.0, 0.01);
+  memcpy(this->W_[i].data(), w_tmp, f_num * f_height * f_width * sizeof(float));
+  delete[] w_tmp;
+  // 初始化权重的导数
+  this->dW_[i] = MatrixXf::Zero(1, f_num * f_height * f_width);
+  // 初始化偏置
+  this->B_[i] = MatrixXf::Zero(1, f_num);
+  // 初始化偏置的导数
+  this->dB_[i] = MatrixXf::Zero(1, f_num);
+  // 初始化输出参数
+  this->O_[i] = MatrixXf::Zero(1, o_height * o_width * f_num);
+  this->dO_[i] = MatrixXf::Zero(1, o_height * o_width * f_num);
+  return "";
+}

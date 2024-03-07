@@ -7,6 +7,7 @@
 #define MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_
 
 #include <layers/affine.h>
+#include <layers/convolution.h>
 #include <layers/relu.h>
 #include <layers/sigmoid.h>
 #include <layers/softmaxwithloss.h>
@@ -52,6 +53,7 @@ class NeuralNetwork {
   void InitSigmoid(int i);
   void InitRelu(int i);
   void InitSoftmaxWithLoss(int i);
+  string InitConv(unordered_map<string, string>& conf, int i);
 
   unordered_map<string, string> conf_;  // 配置信息（configuration information）
   NeuralNetworkLayer nnl_[100];         // 层（layers）
@@ -69,10 +71,13 @@ class NeuralNetwork {
                       // parameter of the layer）
   MatrixXf Y_;        // Softmax函数输出
 
+  ConvConig cc_[100];  // 卷积层配置
+
   Affine affine_;
   Sigmoid sigmoid_;
   ReLU relu_;
   SoftmaxWithLoss softmax_loss_;
+  Convolution conv_;
 };
 
 #endif  // MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_

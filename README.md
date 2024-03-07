@@ -106,9 +106,9 @@ filter_num = 30
 filter_height = 5
 filter_width = 5
 ```
-从以上定义中可以看出，该卷积层的参数包括：pad，填充；stride，步长；channel_num，输入通道数量；filter_num，卷积核（过滤器）数量；filter_height，卷积核高度；filter_width，卷积核宽度。
+从以上定义中可以看出，该卷积层的参数包括：pad，填充；stride，步长；channel_num，输入通道数量；filter_num，卷积核（过滤器）数量；filter_height，卷积核高度；filter_width，卷积核宽度。虽然这里提供了输入通道的配置，但因为我使用的训练数据只有一个通道，所以程序中并不会处理这个参数，等以后使用到多通道数据时再进行处理。
 
-From the above definition, the parameters of this convolutional layer include: pad, padding; stride, step size; channel_num, number of input channels; filter_num, number of convolutional kernels (filters); filter_height, height of convolutional kernel; and filter_width, width of convolutional kernel.
+As you can see from the definition above, the parameters for this convolutional layer include: pad, padding; stride, step size; channel_num, number of input channels; filter_num, number of convolutional kernels (filters); filter_height, height of convolutional kernel; and filter_width, width of convolutional kernel. Although the configuration of input channels is provided here, since the training data I used has only one channel, this parameter will not be processed in the program, and will be processed later when multi-channel data is used.
 
 ##### 5.1.1.5 ReLU
 此定义表示一个线性整流层。与sigmoid层一样，因为其输出大小与输入大小相同，所以不需要特别定义。

@@ -7,7 +7,7 @@
 
 using Eigen::MatrixXf;
 
-/// @brief 线性整流函数类
+/// @brief 线性整流函数类（Class of linear rectifier functions）
 class ReLU {
  public:
   ReLU(){};
