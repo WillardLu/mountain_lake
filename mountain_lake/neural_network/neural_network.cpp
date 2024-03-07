@@ -52,16 +52,21 @@ string NeuralNetwork::ReadConfig(string config_file) {
 
 /// @brief 初始化神经网络（Initialize the neural network）
 /// @param config_file 配置文件名称（Configuration file name）
+/// @param raw_data 原始数据（raw data）
 /// @remark 配置文件要求是TOML文件。
 ///         The configuration file requirement is a TOML file.
 /// @return 错误信息（error message）
-string NeuralNetwork::Init(string config_file) {
+string NeuralNetwork::Init(string config_file, RowData &raw_data) {
   string err = this->ReadConfig(config_file);
   if (!err.empty()) {
     return err;
   }
   this->learning_rate_ = stof(this->conf_["hyper_parameters.learning_rate"]);
   // 逐层进行初始化（Layer-by-layer initialization）
+  this->RD_ = &raw_data.data;
+  this->nnl_[0].output_height = raw_data.height;
+  this->nnl_[0].output_width = raw_data.width;
+  this->nnl_[0].output_size = raw_data.size;
   for (int i = 1; i <= this->layers_; ++i) {
     // 初始化仿射变换层（Initialize the affine transformation layer）
     if (this->nnl_[i].type == "Affine") {

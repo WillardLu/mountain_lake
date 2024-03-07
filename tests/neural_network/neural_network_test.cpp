@@ -17,7 +17,8 @@ TEST(NNTest, ReadConfig) {
 
 TEST(NNTest, Init) {
   NeuralNetwork nn;
-  string err = nn.Init("tests/testdata/config.toml");
+  RowData raw_data;
+  string err = nn.Init("tests/testdata/config.toml", raw_data);
   ASSERT_EQ(err, "");
   ASSERT_EQ(nn.GetLearningRate() * 100, 1);
 }

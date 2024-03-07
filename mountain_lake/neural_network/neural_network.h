@@ -25,13 +25,21 @@ struct NeuralNetworkLayer {
   int output_size = 0;
 };
 
+/// @brief 原始数据结构（structure of raw data）
+struct RowData {
+  MatrixXf data = MatrixXf::Zero(1, 1);
+  int height = 0;
+  int width = 0;
+  int size = 0;
+};
+
 /// @brief 神经网络类（neural network class）
 class NeuralNetwork {
  public:
   NeuralNetwork();
   ~NeuralNetwork();
   string ReadConfig(string config_file);
-  string Init(string config_file);
+  string Init(string config_file, RowData& raw_data);
   inline int GetLayers() { return this->layers_; }
   inline NeuralNetworkLayer& GetLayer(int index) { return this->nnl_[index]; }
   inline float GetLearningRate() { return this->learning_rate_; }
@@ -44,6 +52,7 @@ class NeuralNetwork {
   int layers_;                          // 层的数量（number of layers）
   float learning_rate_;                 // 学习率（learning rate）
 
+  MatrixXf* RD_;      // 原始数据（raw data）
   MatrixXf W_[100];   // 权重（weights）
   MatrixXf B_[100];   // 偏置（bias）
   MatrixXf O_[100];   // 层输出（output of layers）
