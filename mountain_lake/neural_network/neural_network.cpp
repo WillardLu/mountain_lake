@@ -76,6 +76,16 @@ string NeuralNetwork::Init(string config_file, RowData &raw_data) {
       }
       continue;
     }
+    // 初始化Sigmoid层参数
+    if (this->nnl_[i].type == "Sigmoid") {
+      this->InitSigmoid(i);
+      continue;
+    }
+    // 初始化线性整流层参数
+    if (this->nnl_[i].type == "ReLU") {
+      this->InitRelu(i);
+      continue;
+    }
   }
   return "";
 }
@@ -104,4 +114,24 @@ string NeuralNetwork::InitAffine(int i) {
   this->O_[i] = MatrixXf::Zero(1, this->nnl_[i].output_size);
   this->dO_[i] = MatrixXf::Zero(1, this->nnl_[i].output_size);
   return "";
+}
+
+/// @brief 初始化sigmoid激活函数层
+/// @param i 序号
+void NeuralNetwork::InitSigmoid(int i) {
+  this->nnl_[i].output_height = this->nnl_[i - 1].output_height;
+  this->nnl_[i].output_width = this->nnl_[i - 1].output_width;
+  this->nnl_[i].output_size = this->nnl_[i - 1].output_size;
+  this->O_[i] = MatrixXf::Zero(1, this->nnl_[i].output_size);
+  this->dO_[i] = MatrixXf::Zero(1, this->nnl_[i].output_size);
+}
+
+/// @brief 初始化线性整流激活函数层
+/// @param i 序号
+void NeuralNetwork::InitRelu(int i) {
+  this->nnl_[i].output_height = this->nnl_[i - 1].output_height;
+  this->nnl_[i].output_width = this->nnl_[i - 1].output_width;
+  this->nnl_[i].output_size = this->nnl_[i - 1].output_size;
+  this->O_[i] = MatrixXf::Zero(1, this->nnl_[i].output_size);
+  this->dO_[i] = MatrixXf::Zero(1, this->nnl_[i].output_size);
 }

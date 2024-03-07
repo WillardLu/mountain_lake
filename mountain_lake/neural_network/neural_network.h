@@ -7,6 +7,8 @@
 #define MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_
 
 #include <layers/affine.h>
+#include <layers/relu.h>
+#include <layers/sigmoid.h>
 #include <mountain_town/string/toml.h>
 
 #include <eigen3/Eigen/Dense>
@@ -46,6 +48,8 @@ class NeuralNetwork {
 
  private:
   string InitAffine(int i);
+  void InitSigmoid(int i);
+  void InitRelu(int i);
 
   unordered_map<string, string> conf_;  // 配置信息（configuration information）
   NeuralNetworkLayer nnl_[100];         // 层（layers）
@@ -62,6 +66,8 @@ class NeuralNetwork {
                       // parameter of the layer）
 
   Affine affine_;
+  Sigmoid sigmoid_;
+  ReLU relu_;
 };
 
 #endif  // MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_

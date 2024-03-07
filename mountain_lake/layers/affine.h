@@ -12,7 +12,6 @@
 #include <string>
 
 using std::string;
-
 using Eigen::MatrixXf;
 
 /// @brief 仿射变换层类（class of affine transformation layers）

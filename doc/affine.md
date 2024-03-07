@@ -21,8 +21,8 @@ $$
 
 This equation shows that an affine transformation consists of two parts: a linear transformation (represented by matrix $A$) and a translation (represented by vector $b$).
 
-## 2. 计算方法
-![affine layer](affine.png)
+## 2. 计算方法（Computation Method）
+![affine layer](images/affine.png)
 图片来自《深度学习入门——基于Python的理论与实现》（作者：斋藤康毅）。
 
 The image is sourced from "Introduction to Deep Learning - Python-based Theory and Implementation" by Yasuti Saito.
