@@ -21,11 +21,15 @@ $$
 
 This equation shows that an affine transformation consists of two parts: a linear transformation (represented by matrix $A$) and a translation (represented by vector $b$).
 
-## 2. 计算公式
+## 2. 计算方法
 ![affine layer](affine.png)
 图片来自《深度学习入门——基于Python的理论与实现》（作者：斋藤康毅）。
 
-Image from Getting Started with Deep Learning - Python-Based Theory and Implementation (by Yasuyoshi Saito).
+The image is sourced from "Introduction to Deep Learning - Python-based Theory and Implementation" by Yasuti Saito.
+
+我们可以从图片中了解到affine层正向与反向传播的计算方法。
+
+We can understand the calculation of forward and backward propagation of affine layer from the picture.
 
 ### 2.1 正向传播（Forward Propagation）
 $$
