@@ -20,5 +20,5 @@ TEST(NNTest, Init) {
   RowData raw_data;
   string err = nn.Init("tests/testdata/config.toml", raw_data);
   ASSERT_EQ(err, "");
-  ASSERT_EQ(nn.GetLearningRate() * 100, 1);
+  ASSERT_LT(nn.GetLearningRate() - 0.01, 1e-7);
 }

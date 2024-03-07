@@ -86,6 +86,11 @@ string NeuralNetwork::Init(string config_file, RowData &raw_data) {
       this->InitRelu(i);
       continue;
     }
+    // 初始化SoftmaxWithLoss层参数
+    if (this->nnl_[i].type == "SoftmaxWithLoss") {
+      this->InitSoftmaxWithLoss(i);
+      continue;
+    }
   }
   return "";
 }
@@ -134,4 +139,15 @@ void NeuralNetwork::InitRelu(int i) {
   this->nnl_[i].output_size = this->nnl_[i - 1].output_size;
   this->O_[i] = MatrixXf::Zero(1, this->nnl_[i].output_size);
   this->dO_[i] = MatrixXf::Zero(1, this->nnl_[i].output_size);
+}
+
+/// @brief 初始化SoftmaxWithLoss层
+/// @param i 序号
+void NeuralNetwork::InitSoftmaxWithLoss(int i) {
+  this->nnl_[i].output_height = 1;
+  this->nnl_[i].output_width = 1;
+  this->nnl_[i].output_size = 1;
+  this->O_[i] = MatrixXf::Zero(1, 1);
+  this->dO_[i] = MatrixXf::Zero(1, 1);
+  this->Y_ = MatrixXf::Zero(1, this->nnl_[i - 1].output_size);
 }

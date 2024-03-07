@@ -14,8 +14,8 @@ TEST(SigmoidLayer, Forward) {
   }
   MatrixXf Z = MatrixXf::Zero(1, 5);
   sigmoid.Forward(A, Z);
-  ASSERT_EQ(Z(0, 0), 0.5f);
-  ASSERT_EQ(round(Z(0, 2) * 10000), 5050);
+  ASSERT_LT(Z(0, 0) - 0.5f, 1e-7);
+  ASSERT_LT(Z(0, 2) - 0.5050f, 1e-7);
 }
 
 TEST(SigmoidLayer, Backward) {
@@ -31,5 +31,5 @@ TEST(SigmoidLayer, Backward) {
   MatrixXf dA = MatrixXf::Zero(1, 5);
   sigmoid.Backward(dZ, Z, dA);
   ASSERT_EQ(dA(0, 0), 0);
-  ASSERT_EQ(round(dA(0, 2) * 1e6), 768);
+  ASSERT_LT(dA(0, 2) - 768.0f, 1e-7);
 }

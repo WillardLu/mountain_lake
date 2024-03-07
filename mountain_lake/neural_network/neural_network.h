@@ -9,6 +9,7 @@
 #include <layers/affine.h>
 #include <layers/relu.h>
 #include <layers/sigmoid.h>
+#include <layers/softmaxwithloss.h>
 #include <mountain_town/string/toml.h>
 
 #include <eigen3/Eigen/Dense>
@@ -50,11 +51,13 @@ class NeuralNetwork {
   string InitAffine(int i);
   void InitSigmoid(int i);
   void InitRelu(int i);
+  void InitSoftmaxWithLoss(int i);
 
   unordered_map<string, string> conf_;  // 配置信息（configuration information）
   NeuralNetworkLayer nnl_[100];         // 层（layers）
   int layers_;                          // 层的数量（number of layers）
   float learning_rate_;                 // 学习率（learning rate）
+  uint8_t label_;                       // 监督标签
 
   MatrixXf* RD_;      // 原始数据（raw data）
   MatrixXf W_[100];   // 权重（weights）
@@ -64,10 +67,12 @@ class NeuralNetwork {
   MatrixXf dB_[100];  // 偏置的导数（derivative of bias）
   MatrixXf dO_[100];  // 层输出参数的导数（The derivative of the output
                       // parameter of the layer）
+  MatrixXf Y_;        // Softmax函数输出
 
   Affine affine_;
   Sigmoid sigmoid_;
   ReLU relu_;
+  SoftmaxWithLoss softmax_loss_;
 };
 
 #endif  // MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_

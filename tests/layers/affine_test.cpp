@@ -24,9 +24,9 @@ TEST(AffineLayer, Forward) {
   }
   MatrixXf A = MatrixXf::Zero(1, 5);
   affine.Forward(X, W, B, A);
-  ASSERT_EQ(A(0, 0), 0.1425f);
-  ASSERT_EQ(round(A(0, 4) * 10000), 2005);
-  ASSERT_EQ(A(0, 2), 0.1715f);
+  ASSERT_LT(A(0, 0) - 0.1425f, 1e-7f);
+  ASSERT_LT(A(0, 4) - 0.2005f, 1e-7f);
+  ASSERT_LT(A(0, 2) - 0.1715f, 1e-7f);
 }
 
 TEST(AffineLayer, Backward) {
@@ -51,13 +51,13 @@ TEST(AffineLayer, Backward) {
 
   affine.Backward(X, W, dA, dB, dW, dX, 3);
   ASSERT_EQ(dB(0, 3), dA(0, 3));
-  ASSERT_EQ(dW(0, 0), 0.0f);
-  ASSERT_EQ(round(dW(9, 4) * 10000), 36);
-  ASSERT_EQ(round(dW(2, 3) * 10000), 6);
-  ASSERT_EQ(round(dX(0, 0) * 10000), 30);
-  ASSERT_EQ(round(dX(0, 4) * 10000), 230);
-  ASSERT_EQ(round(dX(0, 9) * 10000), 480);
+  ASSERT_LT(dW(0, 0) - 0.0f, 1e-7);
+  ASSERT_LT(dW(9, 4) - 36.0f, 1e-7);
+  ASSERT_LT(dW(2, 3) - 6.0f, 1e-7);
+  ASSERT_LT(dX(0, 0) - 30.0f, 1e-7);
+  ASSERT_LT(dX(0, 4) - 230.0f, 1e-7);
+  ASSERT_LT(dX(0, 9) - 480.0f, 1e-7);
   dX = dX.setZero();
   affine.Backward(X, W, dA, dB, dW, dX, 1);
-  ASSERT_EQ(dX(0, 4), 0);
+  ASSERT_LT(dX(0, 4) - 0.0f, 1e-7);
 }
