@@ -8,6 +8,6 @@
 
 ## 4. [Softmax与交叉熵误差组合层（Softmax and cross-entropy error combination layer）](softmaxwithloss.md)
 
-## 5. [卷积层（Convolution Layer](convolution.md)
+## 5. [卷积层（Convolution Layer）](convolution.md)
 
 ## 6. [池化层（Pooling Layer）](pooling.md)
