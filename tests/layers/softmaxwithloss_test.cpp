@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 #include <gtest/gtest.h>
-#include <layers/softmaxwithloss.h>
+#include <mountain_lake/layers/softmaxwithloss.h>
 
 TEST(SoftmaxWithLossLayer, Forward) {
   SoftmaxWithLoss softmax_loss;

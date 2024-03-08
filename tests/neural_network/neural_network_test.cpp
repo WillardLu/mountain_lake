@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 #include <gtest/gtest.h>
-#include <neural_network/neural_network.h>
+#include <mountain_lake/neural_network/neural_network.h>
 
 TEST(NNTest, ReadConfig) {
   NeuralNetwork nn;
@@ -17,8 +17,13 @@ TEST(NNTest, ReadConfig) {
 
 TEST(NNTest, Init) {
   NeuralNetwork nn;
-  RowData raw_data;
+  RawData raw_data;
+  raw_data.train_data = MatrixXfr::Random(100, 784);
+  raw_data.train_labels = MatrixXb::Random(100, 1);
+  raw_data.row = 28;
+  raw_data.col = 28;
   string err = nn.Init("tests/testdata/config.toml", raw_data);
   ASSERT_EQ(err, "");
   ASSERT_LT(nn.GetLearningRate() - 0.01, 1e-7);
+  ASSERT_EQ(nn.GetTrainData().train_data.rows(), 100);
 }

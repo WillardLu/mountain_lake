@@ -75,7 +75,7 @@ void Convolution::Forward(MatrixXf &X, MatrixXf &W, MatrixXf &B, MatrixXf &O,
 /// @param dW 权重的导数（Derivative of the weights）
 /// @param cc 配置内容（Configuration contents）
 void Convolution::Backward(MatrixXf &X, MatrixXf &dB, MatrixXf &dO,
-                           MatrixXf &dW, ConvConig &cc) {
+                           MatrixXf &dW, ConvConig &cc, int layer_num) {
   int size1 = cc.height * cc.width;
   int size2 = cc.o_height * cc.o_width;
   MatrixXf dO_tmp = dO.reshaped<RowMajor>(cc.number, size2);
@@ -111,4 +111,5 @@ void Convolution::Backward(MatrixXf &X, MatrixXf &dB, MatrixXf &dO,
       }
     }
   }
+  if (layer_num >= 2) return;
 }

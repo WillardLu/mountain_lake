@@ -31,5 +31,5 @@ void Affine::Backward(MatrixXf &X, MatrixXf &W, MatrixXf &dA, MatrixXf &dB,
   // 第一层的仿射变换层不需要计算输入信号的导数。
   // The first affine transform layer does not need to compute the derivatives
   // of the input signal.
-  if (layer_num > 1) dX.noalias() = dA * W.transpose();
+  if (layer_num >= 2) dX.noalias() = dA * W.transpose();
 }

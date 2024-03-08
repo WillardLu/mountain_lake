@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 #include <gtest/gtest.h>
-#include <layers/convolution.h>
+#include <mountain_lake/layers/convolution.h>
 
 /// @brief 卷积层测试
 TEST(ConvolutionTest, Composite) {
@@ -87,7 +87,7 @@ TEST(ConvolutionTest, Composite) {
   MatrixXf dW[10];
   dW[1] = MatrixXf::Zero(1, cc[1].number * cc[1].height * cc[1].width);
 
-  conv.Backward(X, dB[1], dO[1], dW[1], cc[1]);
+  conv.Backward(X, dB[1], dO[1], dW[1], cc[1], 1);
   int size2 = cc[1].o_height * cc[1].o_width;
   MatrixXf dO_tmp = dO[1].reshaped<RowMajor>(cc[1].number, size2);
 

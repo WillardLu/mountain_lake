@@ -35,7 +35,7 @@ class Convolution {
   void Forward(MatrixXf &X, MatrixXf &W, MatrixXf &B, MatrixXf &O,
                ConvConig &cc);
   void Backward(MatrixXf &X, MatrixXf &dB, MatrixXf &dO, MatrixXf &dW,
-                ConvConig &cc);
+                ConvConig &cc, int layer_num);
 
  private:
 };

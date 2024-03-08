@@ -4,7 +4,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 #include <gtest/gtest.h>
-#include <layers/pooling.h>
+#include <mountain_lake/layers/pooling.h>
 
 /// @brief 池化层测试
 TEST(PoolingTest, Composite) {

@@ -14,13 +14,13 @@ add_executable(mountain_lake_test
   ${PROJECT_SOURCE_DIR}/lib/mountain_town/math/random.cpp
   ${PROJECT_SOURCE_DIR}/lib/mountain_town/string/basic.cpp
   ${PROJECT_SOURCE_DIR}/lib/mountain_town/string/toml.cpp
-  ${PROJECT_SOURCE_DIR}/mountain_lake/layers/affine.cpp
-  ${PROJECT_SOURCE_DIR}/mountain_lake/layers/convolution.cpp
-  ${PROJECT_SOURCE_DIR}/mountain_lake/layers/pooling.cpp
-  ${PROJECT_SOURCE_DIR}/mountain_lake/layers/relu.cpp
-  ${PROJECT_SOURCE_DIR}/mountain_lake/layers/sigmoid.cpp
-  ${PROJECT_SOURCE_DIR}/mountain_lake/layers/softmaxwithloss.cpp
-  ${PROJECT_SOURCE_DIR}/mountain_lake/neural_network/neural_network.cpp)
+  ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/affine.cpp
+  ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/convolution.cpp
+  ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/pooling.cpp
+  ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/relu.cpp
+  ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/sigmoid.cpp
+  ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/softmaxwithloss.cpp
+  ${PROJECT_SOURCE_DIR}/src/mountain_lake/neural_network/neural_network.cpp)
 
 target_link_libraries(mountain_lake_test
  PRIVATE
@@ -28,5 +28,5 @@ target_link_libraries(mountain_lake_test
 
 target_include_directories(mountain_lake_test
  PUBLIC
-  ${PROJECT_SOURCE_DIR}/mountain_lake/
+  ${PROJECT_SOURCE_DIR}/src/
   ${PROJECT_SOURCE_DIR}/lib/)
