@@ -7,8 +7,9 @@ add_executable(mountain_lake_test
   neural_network/neural_network_test.cpp
   layers/affine_test.cpp
   layers/convolution_test.cpp
-  layers/relu_test.cpp
+  layers/matmul_test.cpp
   layers/pooling_test.cpp
+  layers/relu_test.cpp
   layers/sigmoid_test.cpp
   layers/softmaxwithloss_test.cpp
   ${PROJECT_SOURCE_DIR}/lib/mountain_town/math/random.cpp
@@ -16,6 +17,7 @@ add_executable(mountain_lake_test
   ${PROJECT_SOURCE_DIR}/lib/mountain_town/string/toml.cpp
   ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/affine.cpp
   ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/convolution.cpp
+  ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/matmul.cpp
   ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/pooling.cpp
   ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/relu.cpp
   ${PROJECT_SOURCE_DIR}/src/mountain_lake/layers/sigmoid.cpp

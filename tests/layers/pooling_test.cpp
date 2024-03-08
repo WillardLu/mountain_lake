@@ -7,7 +7,7 @@
 #include <mountain_lake/layers/pooling.h>
 
 /// @brief 池化层测试
-TEST(PoolingTest, Composite) {
+TEST(PoolingTests, Composite) {
   PoolConfig pc[2];
   pc[1].height = 2;
   pc[1].width = 2;
@@ -63,5 +63,5 @@ TEST(PoolingTest, Composite) {
   // 普通测试1
   ASSERT_EQ(dA[1](0, 0), 0);
   // 普通测试2
-  ASSERT_LT(dA[1](0, 73) - 0.006, 1e-8);
+  ASSERT_LT(abs(dA[1](0, 73) - 0.006), 1e-8);
 }

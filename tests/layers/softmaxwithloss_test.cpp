@@ -6,7 +6,7 @@
 #include <gtest/gtest.h>
 #include <mountain_lake/layers/softmaxwithloss.h>
 
-TEST(SoftmaxWithLossLayer, Forward) {
+TEST(SoftmaxWithLossTests, Forward) {
   SoftmaxWithLoss softmax_loss;
   int label = 3;
   MatrixXf A = MatrixXf(1, 10);
@@ -15,13 +15,13 @@ TEST(SoftmaxWithLossLayer, Forward) {
   }
   MatrixXf Y = MatrixXf(1, 10);
   float loss = softmax_loss.Forward(label, A, Y);
-  ASSERT_LT(Y(0, 0) - 0.09556032f, 1e-8);
-  ASSERT_LT(Y(0, 5) - 0.10045981f, 1e-8);
-  ASSERT_LT(Y(0, 9) - 0.10455965f, 1e-8);
-  ASSERT_LT(loss - 2.317996542749472f, 1e-8);
+  ASSERT_LT(abs(Y(0, 0) - 0.09556032f), 1e-8);
+  ASSERT_LT(abs(Y(0, 5) - 0.10045981f), 1e-8);
+  ASSERT_LT(abs(Y(0, 9) - 0.10455965f), 1e-8);
+  ASSERT_LT(abs(loss - 2.317996542749472f), 1e-8);
 }
 
-TEST(SoftmaxWithLossLayer, Backward) {
+TEST(SoftmaxWithLossTests, Backward) {
   SoftmaxWithLoss softmax_loss;
   int label = 3;
   MatrixXf Y = MatrixXf(1, 10);
@@ -30,7 +30,7 @@ TEST(SoftmaxWithLossLayer, Backward) {
   }
   MatrixXf dA = MatrixXf(1, 10);
   softmax_loss.Backward(Y, label, dA);
-  ASSERT_LT(dA(0, 0) - 0.0f, 1e-8);
-  ASSERT_LT(dA(0, 3) + 0.97f, 1e-8);
-  ASSERT_LT(dA(0, 9) - 0.09f, 1e-8);
+  ASSERT_LT(abs(dA(0, 0) - 0.0f), 1e-8);
+  ASSERT_LT(abs(dA(0, 3) + 0.97f), 1e-8);
+  ASSERT_LT(abs(dA(0, 9) - 0.09f), 1e-8);
 }

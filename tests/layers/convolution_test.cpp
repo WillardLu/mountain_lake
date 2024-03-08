@@ -7,7 +7,7 @@
 #include <mountain_lake/layers/convolution.h>
 
 /// @brief 卷积层测试
-TEST(ConvolutionTest, Composite) {
+TEST(ConvolutionTests, Composite) {
   // 准备测试数据
   // 1. 准备图像数据
   MatrixXf X = MatrixXf(1, 784);
@@ -54,7 +54,7 @@ TEST(ConvolutionTest, Composite) {
     }
   }
   sum1 += B[1](0, 0);
-  ASSERT_LT(O[1](0, 0) - sum1, 1e-8);
+  ASSERT_LT(abs(O[1](0, 0) - sum1), 1e-8);
   // 普通测试2
   sum1 = 0.0f;
   for (int i = 0; i < cc[1].height; ++i) {
@@ -63,7 +63,7 @@ TEST(ConvolutionTest, Composite) {
     }
   }
   sum1 += B[1](0, 0);
-  ASSERT_LT(O[1](0, 5) - sum1, 1e-8);
+  ASSERT_LT(abs(O[1](0, 5) - sum1), 1e-8);
   // 普通测试3
   sum1 = 0.0f;
   for (int i = 0; i < cc[1].height; ++i) {
@@ -72,7 +72,7 @@ TEST(ConvolutionTest, Composite) {
     }
   }
   sum1 += B[1](0, 0);
-  ASSERT_LT(O[1](0, 23 * 24 + 23) - sum1, 1e-8);
+  ASSERT_LT(abs(O[1](0, 23 * 24 + 23) - sum1), 1e-8);
 
   // 准备偏置导数
   MatrixXf dB[10];

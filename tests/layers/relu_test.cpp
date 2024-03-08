@@ -6,7 +6,7 @@
 #include <gtest/gtest.h>
 #include <mountain_lake/layers/relu.h>
 
-TEST(ReluLayer, Forward) {
+TEST(ReluTests, Forward) {
   ReLU relu;
   MatrixXf A = MatrixXf(1, 5);
   for (int i = 0; i < 5; ++i) {
@@ -18,7 +18,7 @@ TEST(ReluLayer, Forward) {
   ASSERT_EQ(Z(0, 2), 0.02f);
 }
 
-TEST(ReluLayer, Backward) {
+TEST(ReluTests, Backward) {
   ReLU relu;
   MatrixXf dZ = MatrixXf::Zero(1, 5);
   for (int i = 0; i < 5; ++i) {

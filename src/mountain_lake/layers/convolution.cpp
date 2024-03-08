@@ -111,5 +111,8 @@ void Convolution::Backward(MatrixXf &X, MatrixXf &dB, MatrixXf &dO,
       }
     }
   }
+  // 如果这个层被放在神经网络中的第一层，则不需要计算输入信号的导数。
+  // If this layer is placed in the first layer in the neural network, there is
+  // no need to calculate the derivative of the input signal.
   if (layer_num >= 2) return;
 }

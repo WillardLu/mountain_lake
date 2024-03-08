@@ -6,7 +6,7 @@
 #include <gtest/gtest.h>
 #include <mountain_lake/layers/sigmoid.h>
 
-TEST(SigmoidLayer, Forward) {
+TEST(SigmoidTests, Forward) {
   Sigmoid sigmoid;
   MatrixXf A = MatrixXf(1, 5);
   for (int i = 0; i < 5; ++i) {
@@ -14,11 +14,11 @@ TEST(SigmoidLayer, Forward) {
   }
   MatrixXf Z = MatrixXf::Zero(1, 5);
   sigmoid.Forward(A, Z);
-  ASSERT_LT(Z(0, 0) - 0.5f, 1e-7);
-  ASSERT_LT(Z(0, 2) - 0.5050f, 1e-7);
+  ASSERT_LT(abs(Z(0, 0) - 0.5f), 1e-7);
+  ASSERT_LT(abs(Z(0, 2) - 0.50499983f), 1e-7);
 }
 
-TEST(SigmoidLayer, Backward) {
+TEST(SigmoidTests, Backward) {
   Sigmoid sigmoid;
   MatrixXf dZ = MatrixXf::Zero(1, 5);
   for (int i = 0; i < 5; ++i) {
@@ -31,5 +31,5 @@ TEST(SigmoidLayer, Backward) {
   MatrixXf dA = MatrixXf::Zero(1, 5);
   sigmoid.Backward(dZ, Z, dA);
   ASSERT_EQ(dA(0, 0), 0);
-  ASSERT_LT(dA(0, 2) - 768.0f, 1e-7);
+  ASSERT_LT(abs(dA(0, 2) - 0.000768f), 1e-7);
 }
