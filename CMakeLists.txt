@@ -7,6 +7,7 @@ project(mountain_lake_test LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 启用GCC所有警告，视警告为错误
 # -O3 表示启用最高优化级别
@@ -27,5 +28,4 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -O3 -fopenmp -mavx
 # 这里的测试内容与 add_test 设置有关。
 enable_testing()
 
-add_subdirectory(src)
 add_subdirectory(tests)

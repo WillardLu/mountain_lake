@@ -8,6 +8,7 @@
 
 #include <mountain_lake/layers/affine.h>
 #include <mountain_lake/layers/convolution.h>
+#include <mountain_lake/layers/matmul.h>
 #include <mountain_lake/layers/pooling.h>
 #include <mountain_lake/layers/relu.h>
 #include <mountain_lake/layers/sigmoid.h>
@@ -38,10 +39,10 @@ struct NeuralNetworkLayer {
 
 /// @brief 原始数据结构（structure of raw data）
 struct RawData {
-  MatrixXfr train_data;
-  MatrixXb train_labels;
-  MatrixXfr test_data;
-  MatrixXb test_labels;
+  MatrixXfr train_data = MatrixXfr::Zero(1, 1);
+  MatrixXb train_labels = MatrixXb::Zero(1, 1);
+  MatrixXfr test_data = MatrixXfr::Zero(1, 1);
+  MatrixXb test_labels = MatrixXb::Zero(1, 1);
   // 单个数据矩阵的行数（Number of rows in a single data matrix）
   int row = 0;
   // 单个数据矩阵的列数（Number of columns in a single data matrix）
@@ -105,6 +106,7 @@ class NeuralNetwork {
   SoftmaxWithLoss softmax_loss_;
   Convolution conv_;
   Pooling pool_;
+  MatMul matmul_;
 };
 
 #endif  // MOUNTAIN_LAKE_NEURAL_NETWORK_NEURAL_NETWORK_H_

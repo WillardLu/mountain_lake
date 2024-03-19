@@ -24,6 +24,9 @@ string NeuralNetwork::ReadConfig(string config_file) {
   if (step_tmp.empty()) {
     return "undefined \"neural_network.struct\"";
   }
+  if (step_tmp.size() == 1 && step_tmp[0].empty()) {
+    return "There are no layers defined in the neural network structure.";
+  }
   vector<string> step_tmp1;
   vector<string> step_tmp2;
   int i = 0;
