@@ -1,0 +1,29 @@
+[neural_network]
+struct = ["Affine:50", "Sigmoid", "Affine:10", "SoftmaxWithLoss"]
+
+struct1 = [
+  "Convolution-1",
+  "ReLU",
+  "Pooling-1",
+  "Affine:100",
+  "ReLU",
+  "Affine:10",
+  "SoftmaxWithLoss",
+]
+
+# 卷积层
+[Convolution-1]
+pad = 0
+stride = 1
+channel_num = 1
+filter_num = 30
+filter_height = 5
+filter_width = 5
+
+# 池化层
+[Pooling-1]
+pool_height = 2
+pool_width = 2
+stride = 2
+filter_num = 30
+type = "Max"
